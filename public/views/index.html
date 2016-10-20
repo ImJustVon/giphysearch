@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles/style.css" />
     <title></title>
   </head>
-  <body ng-app="giphyApp" ng-controller="MainController as main">
+  <body ng-app="pokemonApp" ng-controller="MainController as main">
 
   <!-- <select ng-model="main.selected" ng-change="main.getFilmData()">
     <option ng-repeat="film in main.films" ng-value="film.url"> {{ film.title }} </option>
@@ -19,10 +19,41 @@
   <p ng-repeat="line in main.lines track by $index"> {{line}} </p>
 </main> -->
 
-<div id="form">
+
+  <select ng-model="main.selected" ng-change="main.getSelectedPokemon()">
+      <option ng-repeat="pokemon in main.pokemonArray" ng-value="pokemon.name">{{pokemon.name}}</option>
+    </select>
+
+<h1>{{main.pokemonSelected.name}}</h1>
+<h2>Type(s)</h2>
+<ul>
+  <li ng-repeat="type in main.pokemonSelected.types">
+    {{type.type.name}}
+  </li>
+</ul>
+<!-- <p>
+  {{main.flavorText}}
+</p> -->
+<div class="sprites">
+  <h2>Default</h2>
+  <img ng-src="{{main.pokemonSelected.sprites.front_default}}" />
+</div>
+<div class="sprites">
+  <h2>Shiny</h2>
+  <img ng-src="{{main.pokemonSelected.sprites.front_shiny}}" />
+</div>
+<div>
+  <h2>Moves</h2>
+  <ul>
+    <li ng-repeat="move in main.pokemonSelected.moves">
+      {{move.move.name}}
+    </li>
+  </ul>
+</div>
 
 
-<form>
+
+<!-- <form>
 <input type="text" name="q" ng-model="main.searchPhrase.q"/>
 <button type="submit" ng-click="main.getSearch()">Search</button>
 </form>
@@ -36,7 +67,7 @@
 
 <div id="search" ng-repeat="gif in main.gifsArray">
   <img ng-src="{{ gif.images.original.url }}" />
-</div>
+
 
 
 
